@@ -1,13 +1,19 @@
-<% if @product.featured_image.attached? %>
-  <%= image_tag @product.featured_image, width: 100, height: 100 %>
-<% end %>
+<p><%= link_to "Back", products_path %></p>
 
-<% cache @product do %>
-  <h1><%= @product.name %></h1>
-  <%= @product.description %>
-<% end %>
+<section class="product">
+  <%= if @product.featured_image.attached?
+    image_tag @product.featured_image, width: 100, height: 100
+  end %>
 
-<%= render "inventory", product: @product %>
+  <section class="product-info">
+    <% cache @product do %>
+      <h1><%= @product.name %></h1>
+      <%= @product.description %>
+    <% end %>
 
-<%= link_to "Back", products_path %>
-<%= link_to "Edit", edit_product_path(@product) %>
+    <%= render "inventory", product: @product %>
+
+    <%= link_to "Back", products_path %>
+    <%= link_to "Edit", edit_product_path(@product) %>
+  </section>
+</section>

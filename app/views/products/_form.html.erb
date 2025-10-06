@@ -1,7 +1,5 @@
 <%= form_with model: product do |form| %>
   <div>
-    <h1><%= @product.name if @product.name? %></h1>
-
     <div>
       <%= form.label :name %>
       <%= form.text_field :name %>

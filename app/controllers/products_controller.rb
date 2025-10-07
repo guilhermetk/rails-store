@@ -4,6 +4,11 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all.order(name: :asc)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @products }
+    end
   end
 
   def show

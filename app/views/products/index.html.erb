@@ -1,11 +1,16 @@
-<h1><%= t ".title" %></h1>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900"><%= t ".title" %></h1>
+    <%= link_to "New product", new_product_path, class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md" if authenticated? %>
+  </div>
 
-<%= link_to "New product", new_product_path if authenticated? %>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <div>
-      <%= link_to product.name, product %>
-    </div>
-  <% end %>
+  <div id="products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% @products.each do |product| %>
+      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">
+          <%= link_to product.name, product, class: "text-indigo-600 hover:text-indigo-800" %>
+        </h2>
+      </div>
+    <% end %>
+  </div>
 </div>

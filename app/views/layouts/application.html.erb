@@ -22,16 +22,20 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <nav>
-      <%= link_to "Home", root_path %>
-      <%= link_to "Login", new_session_path unless authenticated? %>
-      <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+  <body class="<%= yield(:body_class) || '' %>">
+    <nav class="bg-gray-50 shadow-sm border-b border-gray-200 px-4 py-3 flex justify-between items-center">
+      <div>
+        <%= link_to "Home", root_path, class: "text-gray-700 hover:text-gray-900 font-medium" %>
+      </div>
+      <div>
+        <%= link_to "Login", new_session_path, class: "text-gray-700 hover:text-gray-900 font-medium" unless authenticated? %>
+        <%= button_to "Log out", session_path, method: :delete, class: "text-gray-700 hover:text-gray-900 font-medium bg-transparent border-none cursor-pointer" if authenticated? %>
+      </div>
     </nav>
 
     <div class="notice"><%= notice %></div>
 
-    <main>
+    <main class="flex-1 <%= yield(:main_class) || '' %>">
       <%= yield %>
     </main>
   </body>

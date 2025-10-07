@@ -1,12 +1,24 @@
-<% if product.inventory_count? %>
-  <p><%= product.inventory_count %>
-    in stock</p>
-<% else %>
-  <p>Out of stock</p>
-  <p>Email me when available.</p>
+<div class="border-t pt-6">
+  <% if product.inventory_count? %>
+    <div class="flex items-center">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+        In Stock
+      </span>
+      <span class="ml-2 text-sm text-gray-600"><%= product.inventory_count %> available</span>
+    </div>
+  <% else %>
+    <div class="space-y-4">
+      <div class="flex items-center">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+          Out of Stock
+        </span>
+      </div>
+      <p class="text-sm text-gray-600">Email me when available.</p>
 
-  <%= form_with model: [product, Subscriber.new] do |form| %>
-    <%= form.email_field :email, placeholder: "you@example.com", required: true %>
-    <%= form.submit "Submit" %>
+      <%= form_with model: [product, Subscriber.new], class: "flex space-x-2" do |form| %>
+        <%= form.email_field :email, placeholder: "you@example.com", required: true, class: "flex-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" %>
+        <%= form.submit "Notify Me", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>
